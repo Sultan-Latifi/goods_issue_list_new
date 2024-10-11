@@ -1,0 +1,98 @@
+<mvc:View controllerName="com.mindsquare.gdmvt.remove.mdeapp.controller.auftragsauswahl" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:core="sap.ui.core" xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+	<App id="GR_App">
+		<Page title="{i18n>goodsremoval}" showNavButton="false" showHeader="false">
+			<content>
+				<smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="ReservationSet" filterBarExpanded="true">
+					<smartFilterBar:controlConfiguration>
+						<smartFilterBar:ControlConfiguration key="Aufnr" visibleInAdvancedArea="true" label="Auftragsnummer">
+							<smartFilterBar:customControl>
+								<Input id="customInput" customData:hasValue="true" width="300px"/>										
+							</smartFilterBar:customControl>
+						</smartFilterBar:ControlConfiguration>
+						 <smartFilterBar:ControlConfiguration key="Werks" visibleInAdvancedArea="true" label="Werk">
+            				<smartFilterBar:customControl>
+            					<Input id="werksInput" customData:hasValue="true" width="300px"/>										
+            				</smartFilterBar:customControl>
+        				</smartFilterBar:ControlConfiguration>
+					</smartFilterBar:controlConfiguration>
+				</smartFilterBar:SmartFilterBar>
+				<smartTable:SmartTable id="smartTableGI" tableType="ResponsiveTable" smartFilterId="smartFilterBar" entitySet="ReservationSet" header="{i18n>StartseiteSmartTableHeader}"
+					showRowCount="true" useExportToExcel="true" enableAutoBinding="true" useVariantManagement="true" showVariantManagement="true"
+					useTablePersonalisation="true" showFullScreenButton="true" initiallyVisibleFields="Aufnr,Werks,Lgort,Bdter"
+					requestAtLeastFields="Aufnr,Werks,Lgort,Bdter,Rsnum,Ktext,Usnam" beforeRebindTable="onBeforeRebindTable">
+					<Table noDataText="{i18n>OverviewSmartTableNoData}" width="auto" sticky="ColumnHeaders" mode="None" growing="true"
+						growingScrollToLoad="true" growingThreshold="50">
+						<!--initialise="_fnGetSmartTableId"-->
+						<columns>
+							<Column width="90px">
+								<customData>
+									<core:CustomData key="p13nData"
+										value='\{"columnKey": "Aufnr","leadingProperty": "Aufnr","sortProperty": "Aufnr","filterProperty": "Aufnr","columnIndex":"1"}'/>
+								</customData>
+								<Text text="{/ReservationSet/Aufnr/#@sap:label}"/>
+							</Column>
+							<Column width="50px">
+								<customData>
+									<core:CustomData key="p13nData"
+										value='\{"columnKey": "Werks","leadingProperty": "Werks","sortProperty": "Werks","filterProperty": "Werks","columnIndex":"2"}'/>
+								</customData>
+								<Text text="{/ReservationSet/Werks/#@sap:label}"/>
+							</Column>
+							<Column width="70px">
+								<customData>
+									<core:CustomData key="p13nData"
+										value='\{"columnKey": "Lgort","leadingProperty": "Lgort","sortProperty": "Lgort","filterProperty": "Lgort","columnIndex":"3"}'/>
+								</customData>
+								<Text text="{/ReservationSet/Lgort/#@sap:label}"/>
+							</Column>
+							<Column width="100px">
+								<customData>
+									<core:CustomData key="p13nData"
+										value='\{"columnKey": "Bdter","leadingProperty": "Bdter","sortProperty": "Bdter","filterProperty": "Bdter","columnIndex":"4","type": "date"}'/>
+								</customData>
+								<Text text="{/ReservationSet/Bdter/#@sap:label}"/>
+							</Column>
+							<!--<Column width="100px">-->
+							<!--	<customData>-->
+							<!--		<core:CustomData key="p13nData"-->
+							<!--			value='\{"columnKey": "Usnam","leadingProperty": "Usnam","sortProperty": "Usnam","filterProperty": "Usnam","columnIndex":"5"}'/>-->
+							<!--	</customData>-->
+							<!--	<Text text="{/ReservationSet/Usnam/#@sap:label}"/>-->
+							<!--</Column>-->
+							<!--<Column width="100px">-->
+							<!--	<customData>-->
+							<!--		<core:CustomData key="p13nData"-->
+							<!--			value='\{"columnKey": "Rsdat","leadingProperty": "Rsdat","sortProperty": "Rsdat","filterProperty": "Rsdat","columnIndex":"5","type": "date"}'/>-->
+							<!--	</customData>-->
+							<!--	<Text text="{/ReservationSet/Rsdat/#@sap:label}"/>-->
+							<!--</Column>-->
+						</columns>
+						<items>
+							<ColumnListItem type="Navigation" press="navToDetail">
+								<FlexBox direction="Column" alignItems="Start">
+									<Title text="{Aufnr}" class="boldText"/>
+									<Text text="{Ktext}"/>
+								</FlexBox>
+								<Text text="{Werks}"/>
+								<Text text="{Lgort}"/>
+								<Text text="{ path: 'Bdter', type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'dd.MM.yy', displayFormat: 'Date', UTC:true } }"/>
+								<!--<Text text="{Rsdat}"/>-->
+							</ColumnListItem>
+						</items>
+					</Table>
+				</smartTable:SmartTable>
+			</content>
+			<!--<footer>-->
+			<!--	<Bar class=" sapContrast sapContrastPlus">-->
+			<!--		<contentLeft width="100%">-->
+			<!--			<Button id="btnSettings" class="sapUiLargeMargins" type="Emphasized" icon="sap-icon://wrench" press="onUserSettingsPress"/>-->
+			<!--		</contentLeft>-->
+			<!--		<contentRight>-->
+			<!--			<Button id="btnSearch" text="{i18n>choose}" class="sapUiLargeMargins" icon="sap-icon://order-status" type="Accept" press="onBtnSubmitPress"/>-->
+			<!--		</contentRight>-->
+			<!--	</Bar>-->
+			<!--</footer>-->
+		</Page>
+	</App>
+</mvc:View>

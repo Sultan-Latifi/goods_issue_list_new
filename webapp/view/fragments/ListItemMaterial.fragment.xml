@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<CustomListItem id="listItemMaterial">
+		<HBox justifyContent="SpaceBetween" alignItems="Center" class="padding">
+			<VBox>
+				<Label text="{RezervationList>Matnr}"/>
+				<Title text="{RezervationList>Maktx}" titleStyle="H6"/>
+			</VBox>
+			<VBox alignItems="End">
+				<Label text="{RezervationList>Lgpbe}" visible="{= ${RezervationList>Lgpbe} ? true : false }"/>
+				<Title text="{RezervationList>Menge}" id="TitleMenge"/>
+				<Label text="{RezervationList>Ausme}" visible="{= ${RezervationList>Ausme} ? true : false }"/>
+			</VBox>
+		</HBox>
+	</CustomListItem>
+</core:FragmentDefinition>

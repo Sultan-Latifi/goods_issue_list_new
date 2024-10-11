@@ -1,0 +1,50 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="com.mindsquare.gdmvt.remove.mdeapp.controller.erweiterte_suche">
+	<App>
+		<pages>
+			<Page title="{i18n>extSearch}" showNavButton="true" navButtonPress="onPageNavButtonPress">
+				<content>
+					<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form0">
+						<sap.ui.layout.form:formContainers>
+							<sap.ui.layout.form:FormContainer id="__container0">
+								<sap.ui.layout.form:formElements>
+									<sap.ui.layout.form:FormElement label="{i18n>orderNr}" id="__element1">
+										<sap.ui.layout.form:fields>
+											<Input width="100%" id="__input1"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>opTxt}" id="__element0">
+										<sap.ui.layout.form:fields>
+											<Input width="100%" id="__input0"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>techLoc}" id="__element2">
+										<sap.ui.layout.form:fields>
+											<InputListItem type="Navigation" label="{i18n>chooseTechLoc}" id="__item0">
+											</InputListItem>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+								</sap.ui.layout.form:formElements>
+							</sap.ui.layout.form:FormContainer>
+						</sap.ui.layout.form:formContainers>
+						<sap.ui.layout.form:layout>
+							<sap.ui.layout.form:ResponsiveGridLayout id="__layout0"/>
+						</sap.ui.layout.form:layout>
+					</sap.ui.layout.form:Form>
+					<FlexBox xmlns="sap.m" width="100%" height="75px" id="__box10" alignItems="Center" justifyContent="Center">
+						<items>
+							<FlexBox xmlns="sap.m" width="50%" id="__box11" alignItems="Center" justifyContent="Center">
+								<items>
+									<Button text="{i18n>search_pl}" width="100%" class="sapUiLargeMargins" icon="sap-icon://search" type="Emphasized" press="OnBtnExtSearchPress">
+										<layoutData>
+											<FlexItemData growFactor="1"/>
+										</layoutData>
+									</Button>
+								</items>
+							</FlexBox>
+						</items>
+					</FlexBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,346 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.1.0",
+		"id": "com.mindsquare.gdmvt.remove.mdeapp",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"ach": "ach",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"ZMDE_GDMVT_SEARCH_HELP_MATNR_SRV": {
+				"uri": "/sap/opu/odata/sap/ZMDE_GDMVT_SEARCH_HELP_MATNR_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/ZMDE_GDMVT_SEARCH_HELP_MATNR_SRV/metadata.xml"
+				}
+			},
+			"ZMDE_GDMVT_REMOVE_LIST_SRV": {
+				"uri": "/sap/opu/odata/sap/ZMDE_GDMVT_REMOVE_LIST_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/ZMDE_GDMVT_REMOVE_LIST_SRV/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"_version": "1.1.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": {
+			"viewName": "com.mindsquare.gdmvt.remove.mdeapp.view.app",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.mindsquare.gdmvt.remove.mdeapp.i18n.i18n"
+				}
+			},
+			"view": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {}
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZMDE_GDMVT_REMOVE_LIST_SRV",
+				"preload": true
+			},
+			"materialList": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"uri": ""
+			},
+			"Rsnum": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"uri": ""
+			},
+			"Aufnr": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"uri": ""
+			},
+			"ErrorRsnum": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"uri": ""
+			},
+			"Locked": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"uri": ""
+			},
+			"materialSearchHelp": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZMDE_GDMVT_SEARCH_HELP_MATNR_SRV",
+				"preload": true
+			},
+			"Sernr": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewPath": "com.mindsquare.gdmvt.remove.mdeapp.view",
+				"controlId": "app",
+				"viewLevel": 1,
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": []
+				}
+			},
+			"routes": [
+				{
+					"name": "auftragsauswahl",
+					"pattern": "",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"auftragsauswahl"
+					]
+				},
+				{
+					"name": "materialList",
+					"pattern": "materialList/{path}/{from}/:rsnum:",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"materialList"
+					]
+				},
+				{
+					"name": "auftragsvorgangsansicht",
+					"pattern": "/auftragsvorgangsansicht/{vornrPath}",
+					"titleTarget": "auftragsvorgangsansicht",
+					"greedy": false,
+					"target": [
+						"auftragsvorgangsansicht"
+					]
+				},
+				{
+					"name": "addMaterialCharg",
+					"pattern": "/addMaterialCharg/:rsnum:/:rspos:/:matnr:/:charg:/:menge:/:sernr:/:lgort:/:ausme:",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"addMaterial"
+					]
+				},
+				{
+					"name": "addMaterial",
+					"pattern": "/addMaterial/:rsnum:/:rspos:/:matnr:/:charg:/:menge:/:sernr:/:lgort:/:ausme:",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"addMaterial"
+					]
+				},
+				{
+					"name": "addMaterialMod",
+					"pattern": "/addMaterialMod${details}",
+					"titleTarget": "addMaterialMod",
+					"greedy": false,
+					"target": [
+						"addMaterialMod"
+					]
+				},
+				{
+					"name": "addMaterialModSer",
+					"pattern": "/addMaterialModSer${details}",
+					"titleTarget": "addMaterialModSer",
+					"greedy": false,
+					"target": [
+						"addMaterialModSer"
+					]
+				},
+				{
+					"name": "addMaterialChargMod",
+					"pattern": "/addMaterialChargMod${details}",
+					"titleTarget": "addMaterialChargMod",
+					"greedy": false,
+					"target": [
+						"addMaterialMod"
+					]
+				},
+				{
+					"name": "addMaterialBarcode",
+					"pattern": "/addMaterialBarcode${barcode}",
+					"titleTarget": "addMaterial",
+					"greedy": false,
+					"target": [
+						"addMaterial"
+					]
+				},
+				{
+					"name": "addMaterialByReservation",
+					"pattern": "/addMaterialByReservation${path}",
+					"titleTarget": "addMaterialByReservation",
+					"greedy": false,
+					"target": []
+				},
+				{
+					"name": "foto_upload",
+					"pattern": "/foto_upload/{vornrPath}",
+					"titleTarget": "foto_upload",
+					"greedy": false,
+					"target": [
+						"foto_upload"
+					]
+				}
+			],
+			"targets": {
+				"auftragsvorgangsansicht": {
+					"viewType": "XML",
+					"viewId": "auftragsvorgangsansicht",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "auftragsvorgangsansicht"
+				},
+				"auftragsauswahl": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "auftragsauswahl"
+				},
+				"auftragssuche": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "auftragssuche"
+				},
+				"vorgangsliste": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "vorgangsliste"
+				},
+				"addMaterial": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "addMaterial"
+				},
+				"addMaterialMod": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "modifyMaterial"
+				},
+				"addMaterialModSer": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "modifyMaterial"
+				},
+				"addMaterialChargMod": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "modifyMaterial"
+				},
+				"addMaterial_vehicle": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "addMaterial"
+				},
+				"fahrzeug_entnahme": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "fahrzeug_entnahme"
+				},
+				"foto_upload": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "foto_upload"
+				},
+				"materialList": {
+					"viewType": "XML",
+					"viewName": "materialList"
+				},
+				"addMaterialByReservation": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewName": "addMaterial"
+				},
+				"modifyMaterial": {
+					"viewType": "XML",
+					"viewName": "modifyMaterial"
+				}
+			}
+		}
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/mind2/mm_kommi_pri/webapp",
+		"_version": "1.1.0"
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	}
+}

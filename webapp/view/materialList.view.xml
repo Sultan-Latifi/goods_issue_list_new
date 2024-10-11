@@ -1,0 +1,217 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	controllerName="com.mindsquare.gdmvt.remove.mdeapp.controller.materialList">
+	<Page showNavButton="false">
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<!--<Button icon="sap-icon://nav-back" press="onNavBack"/>-->
+				</contentLeft>
+				<contentMiddle>
+					<!--<Title text="{= ${Aufnr} !== undefined ? ${i18n>order} : ${i18n>costCenter} }" />-->
+					<Title text="{ parts: [ 'formatterModel>/Aufnr' ], formatter: '.formatter.materialListTitle' }"/>
+					<!--<Title text="{i18n>order}: {Aufnr}" class="fontWhite" level="H2"/>-->
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		<content>
+			<FlexBox alignItems="Start" justifyContent="Center" class="sapUiTinyMarginTopBottom" wrap="Wrap" height="auto">
+				<FlexBox alignItems="Start" justifyContent="Center" width="90%" wrap="Wrap" height="auto">
+					<Title level="H2" text="{Auftext}" wrapping="true"/>
+				</FlexBox>
+			</FlexBox>
+			<!--MATERIAL-->
+			<IconTabBar id="idIconTabBarMulti" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding" select="onIconTabPress">
+				<items>
+					<IconTabFilter icon="sap-icon://add-product" key="MaterialList">
+						<FlexBox width="100%"/>
+						<!--<Input id="iMatnr" width="100%" submit="onMatnrSubmit"/>-->
+						<Toolbar>
+							<!--Alban Change 5/4/2023 add a model to show suggestion to not show them on mobile version-->
+							<!--<Input width="100%" id="iMaterial" submit="onMaterialSubmit(false)" showValueHelp="true" valueHelpRequest="onMatnrHelp"-->
+							<!--	placeholder="{i18n>material}" suggestionItems="{materialSearchHelp>/Mat0mSet}" showSuggestion="true" value="{materialList>/searchValue}">-->
+							<!--	<suggestionItems>-->
+							<!--		<core:ListItem text="{materialSearchHelp>Matnr}" additionalText="{materialSearchHelp>Maktg}" key="{materialSearchHelp>Matnr}"/>-->
+							<!--	</suggestionItems>-->
+							<!--</Input>-->
+							<Input width="100%" id="iMaterial" submit="onMaterialSubmit(false)" showValueHelp="true" valueHelpRequest="onMatnrHelp"
+								placeholder="{i18n>material}" suggestionItems="{materialSearchHelp>/Mat0mSet}" showSuggestion="{phoneModel>/isDesktop}"
+								value="{materialList>/searchValue}">
+								<suggestionItems>
+									<core:ListItem text="{materialSearchHelp>Matnr}" additionalText="{materialSearchHelp>Maktg}" key="{materialSearchHelp>Matnr}"/>
+								</suggestionItems>
+							</Input>
+							<!--<SearchField width="100%" id="iMaterial" search="onMaterialSubmit"/>-->
+							<!--Alban Change 5/4/2023 add a model to show suggestion to not show them on mobile version-->
+							<Button width="25%" icon="sap-icon://bar-code" type="Emphasized" press="onBtnScanPress"/>
+						</Toolbar>
+						<!--<List id="materialList">-->
+						<!--<List id="materialList" items="{ path: 'navOrderMaterial', events: {change:'onDataChange'}">-->
+						<!--			<items>-->
+						<!--				<ObjectListItem title="{Maktx}" intro="{Matnr}" type="Active" press="onListItemPress" number="{AvailableQan}" numberUnit="{Ausme}">-->
+						<!--					<attributes>-->
+						<!--						<ObjectAttribute text="{Charg}"/>-->
+						<!--					</attributes>-->
+						<!--				</ObjectListItem>-->
+						<!--			</items>-->
+						<!--</List>-->
+						<!--<List id="materialList" noDataText="{i18n>noMaterialsFound}" items="{materialList>/materials}">-->
+						<!--	<items>-->
+						<!--		<ObjectListItem title="{materialList>Maktx}" intro="{materialList>Matnr}" type="Active" number="{materialList>Menge}"-->
+						<!--			press="onMaterialListItemPress" numberUnit="{materialList>Ausme}">-->
+						<!--			<firstStatus>-->
+						<!--				<ObjectStatus text="{Vornr}"/>-->
+						<!--			</firstStatus>-->
+						<!--			<attributes>-->
+						<!--				<ObjectAttribute text="{materialList>Matnr}"/>-->
+						<!--				<ObjectAttribute text="{materialList>Charg}"/>-->
+						<!--			</attributes>-->
+						<!--			<markers>-->
+						<!--				<ObjectMarker id="marker" type="{Marker}"/>-->
+						<!--			</markers>-->
+						<!--		</ObjectListItem>-->
+						<!--	</items>-->
+						<!--</List>-->
+						<!--<List id="materialList" noDataText="{i18n>noMaterialsFound}" items="{materialList>/materials}">-->
+						<!--	<items>-->
+						<!--		<ObjectListItem title="{materialList>Maktx}" intro="{materialList>Matnr}" type="Active" number="{materialList>Menge}"-->
+						<!--			press="onMaterialListItemPress" numberUnit="{materialList>Ausme}">-->
+						<!--			<firstStatus>-->
+						<!--				<ObjectStatus text="{Vornr}"/>-->
+						<!--			</firstStatus>-->
+						<!--			<attributes>-->
+						<!--				<ObjectAttribute text="{materialList>Matnr}"/>-->
+						<!--				<ObjectAttribute text="{materialList>Charg}"/>-->
+						<!--			</attributes>-->
+						<!--			<markers>-->
+						<!--				<ObjectMarker id="marker" type="{Marker}"/>-->
+						<!--			</markers>-->
+						<!--		</ObjectListItem>-->
+						<!--	</items>-->
+						<!--</List>-->
+						<List id="materialList" items="{path: 'RezervationList>/', factory: '.onBuildList'}" select="onPressEvent" mode="SingleSelectMaster">
+							<!--	<CustomListItem>
+									<HBox justifyContent="SpaceBetween" alignItems="Center" class="padding">
+										<VBox>
+											<Label text="{RezervationList>Matnr}"/>
+											<Title text="{RezervationList>Maktx}" titleStyle="H6"/>
+										</VBox>
+										<VBox alignItems="End">
+											<Label text="{RezervationList>Lgpbe}" visible="{= ${RezervationList>Lgpbe} ? true : false }"/>
+											<Title text="{RezervationList>Menge}"/>
+											<Label text="{RezervationList>Ausme}" visible="{= ${RezervationList>Ausme} ? true : false }"/>
+										</VBox>
+									</HBox>
+								</CustomListItem>-->
+							<!--<ObjectListItem title="{RezervationList>Maktx}" intro="{RezervationList>Matnr}" number="{RezervationList>AvailableQan}"-->
+							<!--	numberUnit="{RezervationList>Ausme}" type="Active" />-->
+							<dependents>
+								<CustomListItem id="listItemMaterial" >
+									<HBox justifyContent="SpaceBetween" alignItems="Center" class="padding">
+										<VBox>
+										<Text text="{RezervationList>Rspos}"/>
+											<Label text="{RezervationList>Matnr}" class="boldText"/>
+											<Title text="{RezervationList>Maktx}" titleStyle="H6"/>
+											<Text
+												text="{ path: 'RezervationList>Bdter', type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'dd.MM.yy', displayFormat: 'Date', UTC:true } }"/>
+										</VBox>
+										<VBox alignItems="End">
+											<Label text="{RezervationList>Lgpbe}" visible="{= ${RezervationList>Lgpbe} ? true : false }"/>
+											<Title id="TitleMenge"/>
+											<Label text="{RezervationList>Ausme}" visible="{= ${RezervationList>Ausme} ? true : false }"/>
+										</VBox>
+									</HBox>
+								</CustomListItem>
+							</dependents>
+						</List>
+					</IconTabFilter>
+					<!-- Reset-->
+					<IconTabFilter id="basket" key="Basket" icon="sap-icon://cart" count="{materialList>/materials.length}">
+						<List id="basketList" noDataText="{i18n>noMaterialList}" items="{materialList>/materials}" updateFinished="onUpdateFinished">
+							<items>
+								<ObjectListItem title="{materialList>Matnr}" type="Active" press="onMaterialListItemPress" number="{materialList>Menge}"
+									numberUnit="{materialList>Ausme}">
+									<attributes>
+										<ObjectAttribute text="{materialList>Lgort} | {materialList>Lgpbe}" visible="{= ${materialList>Lgpbe} ? true : false }"/>
+										<ObjectAttribute text="{materialList>Lgort}" visible="{= ${materialList>Lgpbe} ? false : true }"/>
+										<ObjectAttribute text="{materialList>Maktx}"/>
+										<!--	<ObjectAttribute text="{ path: 'materialList>Bdter', type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'dd.MM.yy', displayFormat: 'Date', UTC:true } }"/>-->
+									</attributes>
+								</ObjectListItem>
+								<!--								<ObjectListItem intro="{materialList>Matnr}" type="Active" press="onMaterialListItemPress" number="{materialList>Menge}"
+									numberUnit="{materialList>Ausme}">
+									<attributes>
+										<ObjectAttribute text="{materialList>Lgort}{= ${materialList>Lgort} &amp;&amp; ${materialList>Lgpbe} ? ' | ' : '' }{materialList>Lgpbe}"/>
+										<ObjectAttribute text="{materialList>Maktx}"/>
+									</attributes>
+								</ObjectListItem>-->
+							</items>
+						</List>
+					</IconTabFilter>
+					<!-- <IconTabFilter icon="sap-icon://header" key="Header" visible="false">
+						<FlexBox width="100%"/>
+						<Label id="lMovementHeaderText" width="100%" text="{i18n>movement_header_text}"/>
+						<Toolbar>
+							<Input width="100%" id="iMovementHeaderText" placeholder="{i18n>movement_header_text}" maxLength="25"/>
+						</Toolbar>
+					</IconTabFilter> -->
+					<!--RESERVIERUNG-->
+					<!--<IconTabFilter icon="sap-icon://cart-approval" count="" visible="false">-->
+					<!--	<List items="{navComponent}" noDataText="{i18n>noReservation}">-->
+					<!--		<items>-->
+					<!--			<ObjectListItem title="{Maktx}" type="Active" press="onItemPress" number="{IstMenge}" numberUnit="{Meinh}">-->
+					<!--<firstStatus>-->
+					<!--	<ObjectStatus text="{Vornr}"/>-->
+					<!--</firstStatus>-->
+					<!--				<attributes>-->
+					<!--					<ObjectAttribute text="{Matnr}"/>-->
+					<!--<ObjectAttribute text="Vorgang {Vornr} | {Vorltxt}"/>-->
+					<!--				</attributes>-->
+					<!--<markers>-->
+					<!--	<ObjectMarker id="marker" type="{Marker}"/>-->
+					<!--</markers>-->
+					<!--			</ObjectListItem>-->
+					<!--		</items>-->
+					<!--	</List>-->
+					<!--</IconTabFilter>-->
+					<!--WARENKORB (STÜCKLISTE)-->
+					<IconTabFilter icon="sap-icon://cart" visible="false"/>
+				</items>
+			</IconTabBar>
+			<Dialog showHeader="true" title="{i18n>bookingDailog}" id="bookingDialog" verticalScrolling="false">
+				<content>
+					<!-- <CheckBox text="{i18n>printDocument}" selected="true" id="PrintFlag"/> -->
+					<Text text="{i18n>yousure}"/>
+				</content>
+				<beginButton>
+					<Button text="{i18n>cancel}" icon="sap-icon://sys-cancel" type="Reject" data:id="bookingDialog" press="onDialog"/>
+				</beginButton>
+				<endButton>
+					<Button text="{i18n>post}" icon="sap-icon://save" type="Accept" press="onBtnPostPress"/>
+				</endButton>
+			</Dialog>
+		</content>
+		<footer>
+			<Bar class="sapContrast sapContrastPlus">
+				<contentLeft>
+					<Button text="{i18n>cancel}" class="sapUiLargeMargins" icon="sap-icon://sys-cancel" type="Reject" press="onBtnCancelPress"/>
+				</contentLeft>
+				<contentMiddle>
+					<Select id="SortSelect"  change="onSelectChange" width="300px">
+										<core:Item key="Asc_Lgpbe" text="{i18n>AscLgpbe}"/>
+										<core:Item key="Desc_Lgpbe" text="{i18n>DescLgpbe}"/>
+										<core:Item key="Asc_Posnr" text="{i18n>AscPosnr}"/>
+										<core:Item key="Desc_Posnr" text="{i18n>DescPosnr}"/>
+										<core:Item key="Asc_Matnr" text="{i18n>AscMatnr}"/>
+										<core:Item key="Desc_Matnr" text="{i18n>DescMatnr}"/>										
+									</Select>
+					<!--<Button text="{i18n>search}" class="sapUiLargeMargins" icon="sap-icon://search" type="Emphasized" press="onBtnSearchPress"/>-->
+				</contentMiddle>
+				<contentRight>
+					<Button id="btnPost" text="{i18n>post}" class="sapUiLargeMargins" icon="sap-icon://save" type="Accept" data:id="bookingDialog"
+						press="onDialog" visible="false"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

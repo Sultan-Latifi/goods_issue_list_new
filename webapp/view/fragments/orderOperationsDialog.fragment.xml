@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog 
+		title="{i18n>orderOperations}"
+		confirm="onOrderOperationsClose"
+		cancel="onOrderOperationsClose">
+	</SelectDialog>
+</core:FragmentDefinition>

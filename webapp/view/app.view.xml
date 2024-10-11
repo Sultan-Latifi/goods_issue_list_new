@@ -1,0 +1,6 @@
+<mvc:View controllerName="com.mindsquare.gdmvt.remove.mdeapp.controller.app" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+	<App id="app" class="gdmvt_remove_mdeapp">
+	
+	</App>
+</mvc:View>

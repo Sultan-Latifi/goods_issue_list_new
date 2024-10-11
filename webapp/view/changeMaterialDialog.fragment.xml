@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+		<Dialog title="{i18n>changeMaterial} {Matnr}" stretch="true" id="changeQuantityDialog">
+		<content>
+			<FlexBox alignContent="Center" alignItems="Center" direction="Column" class="sapUiSmallMarginTop">
+				<FlexBox width="80%" direction="Column">
+					<Text text="{i18n>diaMessageChange}"/>
+					<Label text="{i18n>newQuant} (in {materialList>Ausme})" class="sapUiSmallMarginTop"/>
+					<Input id="iMengeDialog" type="Tel"/>
+				</FlexBox>
+			</FlexBox>
+		</content>
+		<beginButton>
+			<Button text="{i18n>delete}" press="onBtnDeletePress" type="Reject" width="100px"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>submit}" press="onBtnSubmitDialogPress" type="Accept" width="100px"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

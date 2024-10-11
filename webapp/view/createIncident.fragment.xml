@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="{i18n>createIncident}">
+		<content>
+			<FlexBox width="100%" justifyContent="Center" alignItems="Center">
+				<FlexBox width="50%" justifyContent="Center" alignItems="Center" direction="Column">
+					<Label text="{i18n>jobSite}" />
+					<Input id="iAuftext"/>
+				</FlexBox>
+			</FlexBox>
+		</content>
+		<beginButton>
+			<Button text="{i18n>cancel}" press="onBtnCancelPress" type="Reject" width="100px"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>create}" press="onBtnSubmitIncidentPress" type="Accept" width="100px"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

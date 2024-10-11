@@ -1,0 +1,165 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="com.mindsquare.gdmvt.remove.mdeapp.controller.addMaterial">
+	<Page id="addMaterial" title="{i18n>withdraw_material}: {Rsnum}, {i18n>rspos}: {Rspos}" busy="true" busyIndicatorDelay="0">
+		<content>
+			<FlexBox xmlns="sap.m" width="100%" alignItems="Center" justifyContent="Center">
+				<items>
+					<FlexBox xmlns="sap.m" width="90%" alignItems="Center" justifyContent="Center">
+						<items>
+							<VBox class="sapUiSmallMargin">
+								<f:SimpleForm id="formMaterial" editable="true" layout="ResponsiveGridLayout" title="" singleContainerFullSize="false">
+									<f:content>
+										<FlexBox direction="Column">
+											<FlexBox direction="Row" class="sapUiNoMargin">
+												<FlexBox direction="Column" class="sapUiTinyMarginEnd">
+													<Label text="{i18n>matnumber}"/>
+													<Input value="{Matnr}" type="Tel" editable="false"/>
+												</FlexBox>
+												<FlexBox direction="Column" id="containerCharg">
+													<Label text="{i18n>charg}" required="false"/>
+													<Input id="charge" value="{Charg}" required="false" editable="true"/>
+												</FlexBox>
+											</FlexBox>
+											<!--<Label text="{i18n>material}"/>-->
+											<!--<TextArea value="{Maktx}" editable="false" growing="true" growingMaxLines="2" rows="1"/>-->
+											<Text text="{Maktx}"/>
+											<Label text="{i18n>storageLoc}" visible="false"/>
+											<!-- <Select id="selectWarehouse" selectedKey="{Lgort}" change="onWarehouseChange" forceSelection="true" width="100%" visible="false">
+												<core:ListItem key="{Lgort}" text="{Lgort}" additionalText="{LgortTxt}" />
+											</Select> -->
+											<!-- <FlexBox direction="Row" class="sapUiTinyMarginTop">												 -->
+											<Label text="{i18n>storageLoc}" visible="{= ${Lgort} ? true : false }"/>
+											<Input value="{Lgort}" editable="false" visible="{= ${Lgort} ? true : false }"/>
+											<!-- </FlexBox> -->
+											<FlexBox direction="Row" class="sapUiTinyMarginTop" visible="{= ${Lgpbe} ? true : false }">
+												<FlexBox direction="Column" class="sapUiTinyMarginEnd" visible="{= ${Lgpbe} ? true : false }" >
+													<Label text="{i18n>storageBin}" visible="{= ${Lgpbe} ? true : false }"/>
+													<Input value="{Lgpbe}" editable="false" visible="{= ${Lgpbe} ? true : false }"/>
+												</FlexBox>
+												<FlexBox direction="Column" visible="{= ${Lgpbe} ? true : false }">
+													<Label id="lIstMenge" text="{i18n>AvailableQuan}"/>
+													<Input value="{path: 'AvailableQan', type: 'sap.ui.model.type.Float', formatOptions: { showMeasure: true }} {Meins}" editable="false"/>
+												</FlexBox>
+											</FlexBox>
+											<FlexBox direction="Row" class="sapUiTinyMarginTop">
+												<FlexBox direction="Column" class="sapUiTinyMarginEnd">
+													<Label text="{i18n>KomMenge}"/>
+													<!--<Input value="{= ${Rfmng} + ${Pikmg}} {Meins}" editable="false"/>-->
+													<Input value="{path: 'Rfmng', type: 'sap.ui.model.type.Float', formatOptions: { showMeasure: true }} {Meins}" editable="false"/>
+												</FlexBox>
+												<FlexBox direction="Column">
+													<Label text="{i18n>LifMenge}"/>
+													<Input value="{path: 'Lfimg', type: 'sap.ui.model.type.Float', formatOptions: { showMeasure: true }} {Meins}" editable="false"/>
+												</FlexBox>
+											</FlexBox>
+											<Label id="iMengeText" text="{i18n>NochMenge} in {Meins}"/>
+											<Input id="iMenge" value="{path: 'Menget', type: 'sap.ui.model.type.Float', formatOptions: { showMeasure: true }}" type="Tel"
+												submit="SerialTabChange"/>
+											<!--LP 12-10-21 -->
+											<!-- submit="onBtnSubmitPress" -->
+											<!-- <FlexBox direction="Column" visible="false" class="sapUiTinyMarginTop" id="containerSerialNr">
+												<Label id="serialNumer" text="{i18n>enterSerialNumber}"/>
+												<FlexBox direction="Row" class="sapUiTinyMarginEnd">
+													<Input width="100%" id="iMaterial" editable="true" valueLiveUpdate="true" type="Tel" submit="onInputSubmit"/>
+														<Input id="iSernr" value="{Sernr}" type="Tel" visible="false"/>
+													<Toolbar>
+														<Button width="80%" icon="sap-icon://bar-code" type="Emphasized" press="onBtnScanPress"/>
+													</Toolbar>
+												</FlexBox>
+											</FlexBox> -->
+											<!--LP 12-10-21 -->
+											<Label id="serialNumer" text="{= ${Serpf} === '1' ? ${i18n>DisplaySerialNumber} : ${i18n>enterSerialNumber}}" visible="{= ${Serpf} === '0' ? false : true }"/>
+											<FlexBox visible="{= ${Serpf} === '0' ? false : true }">												
+												<InputListItem ariaLabelledBy="__xmlview0--label1 __xmlview0--label2" type="Navigation" label="Input List Item" id="item0" visible="false">
+													<content/>
+												</InputListItem>
+												<Table items="{SerialTab>/tableData}" visible="{= ${Serpf} === '0' ? false : true }">
+													<items>
+														<ColumnListItem  id="item1_1718012852796">
+															<cells>
+																<Input value="{SerialTab>column1}" width="100%" editable="{= ${Serpf} === '2' ? true : false }" visible="{= ${Serpf} === '0' ? false : true }"/></cells>
+														</ColumnListItem>
+													</items>
+													<columns>
+														<Column >
+														</Column>
+													</columns>
+												</Table>
+											</FlexBox>
+											<VBox id="containerBobine" visible="false">
+												<FlexBox direction="Row">
+													<FlexBox direction="Column" class="sapUiSmallMarginEnd">
+														<Label text="{i18n>from}"/>
+														<Input id="iParamFrom" type="Tel" change="calculateQuant"/>
+													</FlexBox>
+													<FlexBox direction="Column">
+														<Label text="{i18n>to}"/>
+														<Input id="iParamTo" type="Tel" change="calculateQuant"/>
+													</FlexBox>
+												</FlexBox>
+											</VBox>
+										</FlexBox>
+									</f:content>
+								</f:SimpleForm>
+								
+							</VBox>
+						</items>
+					</FlexBox>
+				</items>
+			</FlexBox>
+		</content>
+		<!--<content>-->
+		<!--	<FlexBox xmlns="sap.m" width="100%" alignItems="Center" justifyContent="Center">-->
+		<!--		<items>-->
+		<!--			<FlexBox xmlns="sap.m" width="90%" alignItems="Center" justifyContent="Center">-->
+		<!--				<items>-->
+		<!--					<VBox class="sapUiSmallMargin">-->
+		<!--						<FlexBox xmlns="sap.m" width="90%" alignItems="Center" justifyContent="Center">-->
+		<!--							<items>-->
+		<!--								<VBox class="sapUiSmallMargin">-->
+		<!--									<f:SimpleForm id="scanNumber" layout="ResponsiveGridLayout" title="" singleContainerFullSize="false" visible="false">-->
+		<!--										<f:content>-->
+		<!--											<FlexBox alignItems="Center" justifyContent="Center" direction="Column">-->
+		<!--												<Table width="100%" items="{path: '/Test'}" id="tableId">-->
+		<!--													<columns hAlign="Center">-->
+		<!--														<Column>-->
+		<!--															<Label text="{i18n>ScannedItems}"></Label>-->
+		<!--														</Column>-->
+		<!--														<Column>-->
+		<!--															<Label text="{i18n>DeleteItems}"></Label>-->
+		<!--														</Column>-->
+		<!--													</columns>-->
+		<!--													<items>-->
+		<!--														<ColumnListItem >-->
+		<!--															<cells>-->
+																		<!--			<Text text="{input}"></Text>-->
+																		<!--			<Button icon="sap-icon://delete" press="onDeleteRow"/>-->
+		<!--															</cells>-->
+		<!--														</ColumnListItem>-->
+		<!--													</items>-->
+		<!--												</Table>-->
+		<!--											</FlexBox>-->
+		<!--										</f:content>-->
+		<!--									</f:SimpleForm>-->
+		<!--								</VBox>-->
+		<!--							</items>-->
+		<!--						</FlexBox>-->
+								<!--LP 13-10-21 -->
+		<!--					</VBox>-->
+		<!--				</items>-->
+		<!--			</FlexBox>-->
+		<!--		</items>-->
+		<!--	</FlexBox>-->
+		<!--</content>-->
+		<footer>
+			<Bar class="sapContrast sapContrastPlus">
+				<contentLeft>
+					<Button text="{i18n>cancel}" width="auto" icon="sap-icon://sys-cancel" type="Reject" press="onBtnCancelPress"/>
+				</contentLeft>
+				<contentRight>
+					<Button text="{i18n>addMaterial}" width="auto" icon="sap-icon://add" type="Accept" press="onBtnSubmitPress"/>
+				</contentRight>
+				<contentMiddle/>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>
